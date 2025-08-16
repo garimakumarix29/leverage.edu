@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Job Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #6a11cb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2575fc;
+    }
+
+    #result {
+      margin-top: 20px;
+      background: #f1f1f1;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #444;
+      text-align: left;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🌍 Student Job Finder</h2>
+
+    <!-- Step 1: Personal Info -->
+    <div id="step1">
+      <label>Full Name:</label>
+      <input type="text" id="name">
+
+      <label>Email:</label>
+      <input type="email" id="email">
+
+      <label>University:</label>
+      <input type="text" id="university">
+
+      <button onclick="goToStep2()">Submit</button>
+    </div>
+
+    <!-- Step 2: Job Selection -->
+    <div id="step2" class="hidden">
+      <h3 id="welcome"></h3>
+      <p>Select your country and job type to explore opportunities.</p>
+
+      <label for="country">Country:</label>
+      <select id="country">
+        <option value="uk">United Kingdom</option>
+        <option value="usa">United States</option>
+        <option value="ireland">Ireland</option>
+        <option value="canada">Canada</option>
+        <option value="germany">Germany</option>
+      </select>
+
+      <label for="job">Job Type:</label>
+      <select id="job">
+        <option value="cafes">Cafés</option>
+        <option value="retail">Retail</option>
+        <option value="tutoring">Tutoring</option>
+        <option value="delivery">Delivery</option>
+        <option value="internships">Internships</option>
+      </select>
+
+      <button onclick="showJob()">Show Description</button>
+
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    function goToStep2() {
+      const name = document.getElementById("name").value;
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+      document.getElementById("welcome").innerText = "Welcome, " + name + " 👋";
+    }
+
+    function showJob() {
+      const country = document.getElementById("country").value;
+      const job = document.getElementById("job").value;
+
+      let description = "";
+
+      if (job === "cafes") description = "Work in local cafés helping with serving and cleaning.";
+      if (job === "retail") description = "Assist in shops or supermarkets with stocking and billing.";
+      if (job === "tutoring") description = "Help fellow students or kids with subjects you’re good at.";
+      if (job === "delivery") description = "Part-time food/package delivery jobs with flexible hours.";
+      if (job === "internships") description = "Gain experience in your field while working part-time.";
+
+      document.getElementById("result").innerHTML = 
+        `<strong>Country:</strong> ${country.toUpperCase()} <br>
+         <strong>Job Type:</strong> ${job.toUpperCase()} <br>
+         <strong>Description:</strong> ${description}`;
+    }
+  </script>
+
+</body>
+</html>
